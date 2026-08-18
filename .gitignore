@@ -1,0 +1,72 @@
+# ==============================================================================
+# FASTDO AI TESTING — .gitignore
+# Mục đích: Chặn commit/PR nhầm toàn bộ Source Code hệ thống (fastdo-server/...)
+# vào repo Testing này. Code trong automation/ (kể cả .ts) LÀ tài sản của repo này
+# và phải được track — không có rule nào ở đây được chặn theo đuôi file chung
+# chung (*.ts, *.cs...) để tránh lặp lại lỗi từng chặn nhầm code automation.
+# ==============================================================================
+
+# 1. Source code hệ thống — chặn toàn bộ thư mục (không phải tài sản repo Testing)
+fastdo-server/
+FastdoServer/
+FastdoNative/
+fastdo-native/
+fastdo-mobile/
+
+# 2. Build output / dependencies
+bin/
+obj/
+node_modules/
+packages/
+dist/
+build/
+.next/
+.nuget/
+
+# 3. Bí mật & session đăng nhập của automation — KHÔNG BAO GIỜ commit
+automation/.env
+automation/.env.local
+automation/.env.*.local
+automation/playwright/.auth/
+
+# 4. Output tạm của Playwright — không phải evidence chính thức (đó là reports/screenshots
+#    và reports/Test_Report_*.md, được track bình thường)
+automation/test-results/
+reports/playwright-report/
+
+# 5. Artifact session-local của Claude Code, không phải config của dự án
+.claude/
+
+# 6. Python temp / virtualenv (script scratch phụ trợ của AI)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# 7. File tạm hệ điều hành và IDE
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# 8. File logs, dump, cache cá nhân
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo

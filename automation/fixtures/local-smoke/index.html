@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Fastdo AI Testing — Harness Smoke Fixture</title>
+</head>
+<body>
+  <h1 id="hero">Harness OK</h1>
+  <button id="reveal-btn">Hiện thông báo</button>
+  <p id="hidden-message" hidden>Đây là phần tử chỉ hiện sau khi bấm nút.</p>
+  <script>
+    document.getElementById('reveal-btn').addEventListener('click', () => {
+      document.getElementById('hidden-message').hidden = false;
+    });
+  </script>
+</body>
+</html>
