@@ -24,6 +24,12 @@
                               [3] Chạy test tự động + ghi Sheet
                               [4] Làm tuần tự 1→2→3, dừng chờ QC xác nhận sau bước 1 và 2
 
+🔴 Quy tắc ghi Sheet (cố định, QC không cần sửa):
+   - Lúc viết testcase: KHÔNG điền cột Ưu tiên và Trạng thái.
+   - Khi chạy test: điền Trạng thái theo kết quả thật (DONE / Fail / Pending nếu không xác nhận được).
+   - Cột Ưu tiên: CHỈ điền khi test ra bug thật (mức Quan trọng hoặc Khẩn cấp).
+   - Không ghi vào cột DEV Note.
+
 🟡 (chỉ điền nếu có) Dữ liệu/trạng thái đặc thù cần sẵn + tài khoản test thứ 2: <...>
 🟡 (chỉ điền nếu có) Chỉ chạy lại 1 phần — mã testcase cần chạy: <VD TK800_003 → TK800_006>
 🟡 (chỉ khi nhờ làm Test Report) Developer: <...>  |  Reviewer/Approver: <...>
@@ -90,7 +96,7 @@ Hỗ trợ QC tự động phân tích ticket Update, đọc source code ở ch�
 3. **Tiền đề phải được THẤY** (chụp/quay) — không tin mô tả suông.
 4. **So khớp chuỗi tiếng Việt không phân biệt hoa/thường**. "Giống bug" ≠ bug: xác nhận định danh (ID) trước khi kết luận.
 5. **Bằng chứng 3 loại** (Rules_Skill B.4): UI qua CDP+video > đọc code (ghi "XÁC NHẬN QUA ĐỌC CODE" + đường dẫn file đã đọc) > cần QC test tay. Control không tự động hoá được sau 2–3 cách → dừng, ghi "cần QC test tay" (B.6).
-6. **Ghi Sheet chỉ qua `jwt_sheets.js`**, đúng nhóm cột `TEST LẦN N` (dò 2 dòng tiêu đề, không hardcode cột), Trạng thái phản ánh đúng lần này, **đọc lại sau khi ghi**. Dropdown (Ưu tiên/Môi trường/Trạng thái/Nền tảng/QC) tra Data Validation thật của Sheet trước khi ghi (Rules_Skill B.3).
+6. **Ghi Sheet chỉ qua `jwt_sheets.js`**, đúng nhóm cột `TEST LẦN N` (dò 2 dòng tiêu đề, không hardcode cột), Trạng thái phản ánh đúng lần này (lúc sinh testcase để trống `Ưu tiên` và `Trạng thái`; `Ưu tiên` chỉ điền khi test ra bug thật), **đọc lại sau khi ghi**. Dropdown (Ưu tiên/Môi trường/Trạng thái/Nền tảng/QC) tra Data Validation thật của Sheet trước khi ghi (Rules_Skill B.3).
 7. **Kết quả thực hiện** (ghi trong Note của lần test đó): 2–3 câu tiếng Việt thường ngày, tự đủ nghĩa (tiền đề → hành động → kết quả quan sát → cách xác minh); không dán JSON/thuật ngữ kỹ thuật. Bug thật ⇒ Ưu tiên `Quan trọng`/`Khẩn cấp`.
 8. **Video**: quay tới khi có kết quả cuối (chờ ~1.5s + chụp ảnh trước `recorder.stop()`); chỉ dùng `ctx.slowClickXY`/`ctx.safeClick` (con trỏ ảo); mỗi case 1 script = 1 video.
 9. **Dọn dẹp**: xoá video local sau upload Catbox, xoá `shots/`, đóng bớt tab cũ (không đóng tab cuối).
