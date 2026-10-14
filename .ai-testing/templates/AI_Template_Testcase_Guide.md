@@ -14,10 +14,12 @@ QC chỉ cần làm đúng 3 việc, không cần đọc phần còn lại:
 
 | Cột | Ai điền |
 |---|---|
-| ID, Function, Tiêu đề, Nền tảng, Ưu tiên, Môi trường, Trạng thái, Note, Test Date | **AI** điền (testcase do AI sinh; kết quả do AI test) |
+| ID, Function, Tiêu đề, Nền tảng, Môi trường, Note, Test Date | **AI** điền (testcase do AI sinh; kết quả do AI test) |
+| Ưu tiên, Trạng thái | **AI KHÔNG điền lúc sinh testcase** (để trống). Chỉ điền khi đã chạy test: Trạng thái theo kết quả thật; Ưu tiên chỉ khi test ra bug thật |
 | DEV NOTE | **Developer** (Fixed / Cannot reproduce / Need BA confirm / Waiting deploy / Duplicate bug) — AI không đụng vào |
 | QC | **QC** chọn tên mình (hoặc AI điền theo tên QC đã ghi ở khối điền) |
 
+**Quy định của QC:** lúc sinh testcase, để trống 2 cột `Ưu tiên` và `Trạng thái` (không điền cả `Pending`). Trạng thái chỉ điền sau khi chạy test; Ưu tiên chỉ điền khi test ra bug thật (mức `Quan trọng`/`Khẩn cấp`).
 AI chỉ được chốt trạng thái `DONE` hoặc `Fail` khi đã tự xác nhận; không chắc → `Pending` và ghi lý do trong Note, hoặc hỏi QC.
 
 ---
@@ -50,7 +52,7 @@ Mô tả cấu trúc **Template Checklist** (`Template Checklist .xlsx`, sheet `
 
 **Nền tảng** — theo Data Validation của template: `Web` · `App` · `Web + App`. (API → ghi `Web`/`App` theo nơi gọi và nêu rõ "API" trong Tiêu đề/Note.)
 
-**Ưu tiên** — template: `Thấp` · `Trung bình` · `Quan trọng` · `Khẩn cấp`. Quy tắc chọn:
+**Ưu tiên** — **để trống lúc sinh testcase; chỉ điền khi test ra bug thật** (mức độ của bug). Template: `Thấp` · `Trung bình` · `Quan trọng` · `Khẩn cấp`. Quy tắc chọn:
 - `Khẩn cấp`: ảnh hưởng hệ thống, Payroll, Checkin; tính năng trong spec nhưng chưa lập trình (Rules_Skill B.5).
 - `Quan trọng`: ảnh hưởng chức năng chính; bug thật phát hiện khi test.
 - `Trung bình`: lỗi nghiệp vụ phụ.
@@ -58,7 +60,7 @@ Mô tả cấu trúc **Template Checklist** (`Template Checklist .xlsx`, sheet `
 
 **Môi trường** — template: `Beta` · `Localhost` · `Production`. Lấy theo Môi trường QC ghi trong khối điền.
 
-**Trạng thái** — template: `DONE` · `Fail` · `Doing` · `Cancel` · `Pending`. AI chỉ tự chốt `DONE`/`Fail` (và `Pending` khi lần này không xác nhận được). Sinh testcase xong chưa chạy → `Pending`. Giữ đúng chữ hoa/thường như Data Validation.
+**Trạng thái** — template: `DONE` · `Fail` · `Doing` · `Cancel` · `Pending`. AI chỉ tự chốt `DONE`/`Fail` (và `Pending` khi lần này không xác nhận được). **Sinh testcase xong chưa chạy → để trống, không điền `Pending`.** Giữ đúng chữ hoa/thường như Data Validation.
 
 **Note** — nơi ghi nội dung của lần test đó (template **không có cột Mô tả riêng**; sheet cũ như `fEvaluation - VIBE` tách thành cột Mô tả + cột Kết quả thực hiện, còn template hàng tuần gộp cả hai vào Note). Thuật ngữ thống nhất là **"Kết quả mong đợi"** (sheet cũ có thể ghi "Kết quả mong muốn" — cùng nghĩa):
 - *TEST LẦN 1, lúc sinh testcase* — khối nội dung testcase theo Rules_Skill C.6, xuống dòng thật `\n`:
@@ -85,7 +87,7 @@ Mô tả cấu trúc **Template Checklist** (`Template Checklist .xlsx`, sheet `
 
 **Ticket Bug:** đọc Bug Description & Steps → phân tích nguyên nhân → sinh testcase Re-test (đúng kịch bản & dữ liệu gốc), Regression, Boundary, và các case liên quan cùng root cause.
 
-Quy tắc viết nội dung: xem `AI_Prompt_Template_Ticket_Update.md` mục 2b.B (tiêu đề trung lập, điều kiện cụ thể, bước xác nhận tiền đề, tách nhỏ 1 rule = 1 case). Mỗi testcase phải có: Function · Tiêu đề · Ưu tiên · Nền tảng · Môi trường · Kết quả mong đợi (trong Note) · Test Date (khi đã chạy) · Actual result (nếu bug).
+Quy tắc viết nội dung: xem `AI_Prompt_Template_Ticket_Update.md` mục 2b.B (tiêu đề trung lập, điều kiện cụ thể, bước xác nhận tiền đề, tách nhỏ 1 rule = 1 case). Mỗi testcase phải có: Function · Tiêu đề · Nền tảng · Môi trường · Kết quả mong đợi (trong Note hoặc cột Mô tả) · Test Date (khi đã chạy) · Actual result (nếu bug). Ưu tiên chỉ có khi là bug thật; Trạng thái chỉ có sau khi chạy test.
 
 ## Coverage — chọn theo ticket, không sinh thừa
 
